@@ -1,0 +1,18 @@
+student@systems-vm:~/Documents/project-3-maalanis/shapeLib> make
+msp430-elf-gcc -mmcu=msp430g2553 -Os -I../h  -L../lib -L/opt/ti/msp430_gcc/include/ shapedemo.o libShape.a wdt_handler.s switches.o -L../lib -lTimer -lLcd -lShape -lp2sw -lCircle -o shapedemo.elf
+switches.o: In function `switch_init':
+switches.c:(.text+0x1c): multiple definition of `switch_init'
+libShape.a(switches.o):switches.c:(.text+0x1c): first defined here
+switches.o: In function `switch_interrupt_handler':
+switches.c:(.text+0x3e): multiple definition of `switch_interrupt_handler'
+libShape.a(switches.o):switches.c:(.text+0x3e): first defined here
+switches.o:(.data+0x0): multiple definition of `color'
+libShape.a(switches.o):(.data+0x0): first defined here
+switches.o: In function `do_button1':
+switches.c:(.text+0x68): multiple definition of `do_button1'
+libShape.a(switches.o):switches.c:(.text+0x68): first defined here
+switches.o:(.data+0x1): multiple definition of `blink_mode'
+libShape.a(switches.o):(.data+0x1): first defined here
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:31: shapedemo.elf] Error 1
+student@systems-vm:~/Documents/project-3-maalanis/shapeLib> 
