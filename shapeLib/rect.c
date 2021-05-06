@@ -51,3 +51,54 @@ void abRectOutlineGetBounds(const AbRectOutline *rect, const Vec2 *centerPos, Re
 
 
 
+
+
+// true if pixel is in rect centerPosed at rectPos
+int 
+abStarCheck(const AbStar *star, const Vec2 *centerPos, const Vec2 *pixel)
+{
+  Region bounds;
+  abRectGetBounds(star, centerPos, &bounds);
+  int within = 1, axis;
+  for (axis = 0; axis < 2; axis ++) {
+    int p = pixel->axes[axis];
+    if (p > bounds.botRight.axes[axis] || p < bounds.topLeft.axes[axis])
+      within = 0;
+  }
+  return within;
+}
+
+// compute bounding box in screen coordinates for rect at centerPos
+void abStarGetBounds(const AbStar *star, const Vec2 *centerPos, Region *bounds)
+{
+  vec2Sub(&bounds->topLeft, centerPos, &star->halfSize);
+  vec2Add(&bounds->botRight, centerPos, &star->halfSize);
+}
+
+
+
+// true if pixel is in rect centerPosed at rectPos
+int 
+abStarOutlineCheck(const AbStarOutline *star, const Vec2 *centerPos, const Vec2 *pixel)
+{
+  Region bounds;
+  abStarOutlineGetBounds(star, centerPos, &bounds);
+  int col = pixel->axes[0], row = pixel->axes[1];
+  return (
+	  ((col == bounds.topLeft.axes[0] || col == bounds.botRight.axes[0])
+	   && 
+	   (row >= bounds.topLeft.axes[1] && row <= bounds.botRight.axes[1]))
+	  ||
+	  ((row == bounds.topLeft.axes[1] || row == bounds.botRight.axes[1])
+	   &&
+	   (col >= bounds.topLeft.axes[0] && col <= bounds.botRight.axes[0]))
+	  );
+}
+ 
+// compute bounding box in screen coordinates for rect at centerPos
+void abStarOutlineGetBounds(const AbStarOutline *star, const Vec2 *centerPos, Region *bounds)
+{
+  vec2Sub(&bounds->topLeft, centerPos, &star->halfSize);
+  vec2Add(&bounds->botRight, centerPos, &star->halfSize);
+}
+

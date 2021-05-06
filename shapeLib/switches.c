@@ -6,7 +6,7 @@
 #include "buzzer.h"
 #include "libTimer.h"
 #include "stateMachines.h"
-#include "shape.h"
+//#include "shape.h"
 
 char switch_state_down, switch_state_changed; /* effectively boolean */
 char blink_mode = 0;
@@ -73,23 +73,23 @@ switch_interrupt_handler()
 char 
 do_button1(char p2val)
 {
-  if(power){
-    power = 0;
+  //  if(power){
+  //  power = 0;
     //or_sr(0x10);
-    and_sr(~8);// turn off 
-    color = 0;
-    P1OUT &= (0xff - LEDS); // clear bits for off leds
-    P1OUT |= LED_RED;
-    led_update();
+  //  and_sr(~8);// turn off 
+  // color = 0;
+  // P1OUT &= (0xff - LEDS); // clear bits for off leds
+  // P1OUT |= LED_RED;
+  // led_update();
    
-  } else {
+  // } else {
     P1OUT &= (0xff - LEDS);
     P1OUT |= LED_GREEN;
     power =1;
     //and_sr(~8);
     or_sr(8);    //turn on
     
-  }
+    // }
     enableWDTInterrupts();
   if(!box_color1){
     //  buzzer_set_period(0);

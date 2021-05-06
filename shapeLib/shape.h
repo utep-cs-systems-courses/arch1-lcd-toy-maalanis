@@ -1,3 +1,6 @@
+
+
+
 /** \file shape.h
  *  \brief 
  */ 
@@ -121,6 +124,22 @@ void abRArrowGetBounds(const AbRArrow *arrow, const Vec2 *centerPos, Region *bou
  */
 int abRArrowCheck(const AbRArrow *arrow, const Vec2 *centerPos, const Vec2 *pixel);
 
+
+typedef struct AbStar_s {
+  void (*getBounds)(const struct AbStar_s *star, const Vec2 *centerPos, Region *bounds);
+  int (*check)(const struct AbStar_s *star, const Vec2 *centerPos, const Vec2 *pixel);
+  const Vec2 halfSize;
+} AbStar;
+
+void abStarGetBounds(const AbStar *star, const Vec2 *centerPos, Region *bounds);
+
+int abStarCheck(const AbStar *star, const Vec2 *ceterPos, const Vec2 *pixel);
+
+typedef AbStar AbStarOutline;
+
+void abStarOutlineGetBounds(const AbStar *star, const Vec2 *centerPos, Region *bounds);
+
+int abStarOutlineCheck(const AbStar *star, const Vec2 *centerPos, const Vec2 *pixel);
 /** AbShape rectangle
  *
  *  Vector halfSize must be to first quadrant (both axes non-negative).  

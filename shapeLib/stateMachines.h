@@ -7,6 +7,6 @@ void state_advance();
 void state_advance_flip();
 
 
-void sound_on();
-void sound_off();
+char sound_on();
+char sound_off();
 #endif // included
