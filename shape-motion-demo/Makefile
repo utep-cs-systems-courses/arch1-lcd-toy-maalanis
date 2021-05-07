@@ -9,8 +9,13 @@ AS              = msp430-elf-gcc -mmcu=${CPU} -c
 
 all:shapemotion.elf
 
+install: libShape.a
+	mkdir -p ../h ../lib
+	mv $^ ../lib
+	cp *./h ../h
+
 #additional rules for files
-shapemotion.elf: ${COMMON_OBJECTS} shapemotion.o wdt_handler.o
+shapemotion.elf: ${COMMON_OBJECTS} shapemotion.o wdt_handler.o switches.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd -lShape -lCircle -lp2sw
 
 load: shapemotion.elf
