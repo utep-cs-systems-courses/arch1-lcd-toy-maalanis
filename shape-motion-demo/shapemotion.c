@@ -79,8 +79,10 @@ typedef struct MovLayer_s {
 
 /* initial value of {0,0} will be overwritten */
 MovLayer ml3 = { &layer3, {1,1}, 0 }; /**< not all layers move */
-MovLayer ml1 = { &layer1, {1,2}, &ml3 }; 
-MovLayer ml0 = { &layer0, {2,1}, &ml1 }; 
+MovLayer ml4 = { &layer4, {2,2}, &ml3 };
+//MovLayer ml1 = { &layer1, {1,2}, &ml4 }; 
+//MovLayer ml0 = { &layer0, {2,1}, &ml1 };
+//MovLayer ml4 = { &layer4, {2,2}, &ml0 };
 
 void movLayerDraw(MovLayer *movLayers, Layer *layers)
 {
@@ -150,7 +152,7 @@ void mlAdvance(MovLayer *ml, Region *fence)
 
 u_int bgColor = COLOR_BLUE;     /**< The background color */
 int redrawScreen = 1;           /**< Boolean for whether screen needs to be redrawn */
-
+int box_color=0;
 Region fieldFence;		/**< fence around playing field  */
 
 
@@ -169,8 +171,8 @@ void main()
 
   shapeInit();
 
-  layerInit(&layer0);
-  layerDraw(&layer0);
+  layerInit(&layer4);
+  layerDraw(&layer4);
 
 
   layerGetBounds(&fieldLayer, &fieldFence);
@@ -187,7 +189,7 @@ void main()
     }
     P1OUT |= GREEN_LED;       /**< Green led on when CPU on */
     redrawScreen = 0;
-    movLayerDraw(&ml0, &layer0);
+    movLayerDraw(&ml4, &layer4);
   }
 }
 
@@ -198,7 +200,19 @@ void wdt_c_handler()
   P1OUT |= GREEN_LED;		      /**< Green LED on when cpu on */
   count ++;
   if (count == 15) {
-    mlAdvance(&ml0, &fieldFence);
+    if(box_color> 5)
+      {
+	layer4.color = COLOR_GREEN;
+	box_color++;
+      }
+    if(box_color<10)
+      {
+	layer4.color = COLOR_WHITE;
+	box_color++;
+      }
+    if(box_color ==15)
+      box_color = 0;
+    mlAdvance(&ml4, &fieldFence);
     if (p2sw_read())
       redrawScreen = 1;
     count = 0;
