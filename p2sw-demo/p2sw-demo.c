@@ -6,7 +6,8 @@
 #include <lcdutils.h>
 #include <lcddraw.h>
 #include <p2switches.h>
-
+#include <shape.h>
+#include <abCircle.h>
 
 /** Initializes everything, clears the screen, draws "hello" and the circle */
 void main()
@@ -14,6 +15,9 @@ void main()
   configureClocks();
   lcd_init();
   p2sw_init(15);
+ 
+   //  enableWDTInterrupts();
+  
   or_sr(0x8);			/* GIE (enable interrupts) */
   u_char width = screenWidth, height = screenHeight;
 
