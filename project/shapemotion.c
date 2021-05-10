@@ -132,6 +132,8 @@ void mlAdvance(MovLayer *ml, Region *fence)
     ml->layer->posNext = newPos;
   } /**< for ml */
 }
+  
+
 
 
 u_int bgColor = COLOR_BLUE;     /**< The background color */
