@@ -251,17 +251,7 @@ int box_color = 0;
 
 void init()
 {
-  // name[0]='S';
-  // name[1]='a';
-//   name[2]='m';
-//   name[3]=' ';
-//   name[4]='T';
-//   name[5]='.';
-
-  // int box_color = 0;	
-
-  //  int vic=0;
-
+  
 /////////////////////////////////////
     Vec2 posPad;
     vec2Add(&posPad, &ml5.layer->posNext, &ml5.velocity);
