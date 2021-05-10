@@ -46,14 +46,6 @@ Layer MyLayer2= {
 };
 ////////////////////////////////////////////////////////////////////////
 
-//Layer layer3 = {		/**< Layer with an orange circle */
-// (AbShape *)&circle8,
-// {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
-   // {0,0}, {0,0},				    /* last & next pos */
-	     // COLOR_VIOLET,
-//  &MyLayer2,
-//};
-
 
 Layer fieldLayer = {		/* playing field as a layer */
   (AbShape *) &fieldOutline,
@@ -71,18 +63,6 @@ Layer layer1 = {		/**< Layer with a red square */
   &fieldLayer,
 };
 
-//Layer layer0 = {		/**< Layer with an orange circle */
-// (AbShape *)&circle14,
-// {(screenWidth/2)+10, (screenHeight/2)+5}, /**< bit below & right of center */
-   // {0,0}, {0,0},				    /* last & next pos */
-	     // COLOR_ORANGE,
-// &layer1,
-//};
-
-/** Moving Layer
- *  Linked list of layer references
- *  Velocity represents one iteration of change (direction & magnitude)
- */
 typedef struct MovLayer_s {
   Layer *layer;
   Vec2 velocity;
@@ -171,7 +151,7 @@ Region fieldFence;		/**< fence around playing field  */
 /** Initializes everything, enables interrupts and green LED, 
  *  and handles the rendering for the screen
  */
-
+/*
 void change_box(){
 
   static int box_color = 0;
@@ -246,9 +226,8 @@ void change_box(){
     
   }
   
-       }
+  }*/
 int box_color = 0;
-
 void init()
 {
   
@@ -260,20 +239,7 @@ void init()
 ///////////////////////////////////
   for(;;) {
     change_box();
-    /* 
-    if(box_color<7)
-      {
-	layer1.color = COLOR_GREEN;
-	box_color++;
-      }
-    if(box_color>=7)
-      {
-	layer1.color = COLOR_RED;
-	box_color++;
-      }
-    if(box_color==15)
-    box_color=0;*/
-    //    vic=0;
+    
         drawString5x7(screenWidth/2-5,2, 0, COLOR_GREEN, COLOR_BLUE);
     //////////////////Reseting buttons
         char str[5];
